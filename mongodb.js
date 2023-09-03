@@ -147,3 +147,110 @@ db.products.find({
         $type: ['int', 'long']
     }
 })
+
+db.customers.insertOne({
+    _id: 'joko',
+    name: 'joko'
+})
+
+db.customers.find({
+    $expr: {
+        $eq: ['$_id', '$name']
+    }
+})
+
+db.products.find({
+    $jsonSchema: {
+        required: ['name', 'category']
+    }
+})
+
+db.products.find({
+    $jsonSchema: {
+        required: ['name'],
+        properties: {
+            name: {
+                type: 'string'
+            },
+            price: {
+                type: 'number'
+            }
+        }
+    }
+})
+
+db.products.find({
+    price: {
+        $mod: [5, 0]
+    }
+})
+
+db.products.find({
+    price: {
+        $mod: [1000000, 0]
+    }
+})
+
+db.products.find({
+    name: {
+        $regex: /mie/,
+        $options: 'i'
+    }
+})
+
+db.products.find({
+    name: {
+        $regex: /^Mie/
+    }
+})
+
+
+db.customers.find({
+    $where: function (){
+        return this._id == this.name;
+    }
+})
+
+db.products.insertMany([
+    {
+        _id: 6,
+        name: "Logitech Wireless Mouse",
+        price: new NumberLong("175000"),
+        category: "laptop",
+        tags: ["logitech", "mouse", "accessories"]
+    },
+    {
+        _id: 7,
+        name: "Cooler Pad Gaming",
+        price: new NumberLong("200000"),
+        category: "laptop",
+        tags: ["cooler", "laptop", "accessories", "fan"]
+    },
+    {
+        _id: 8,
+        name: "Samsung Curve Monitor",
+        price: new NumberLong("1750000"),
+        category: "computer",
+        tags: ["samsung", "monitor", "computer"]
+    }
+])
+
+db.products.find({
+    tags: {
+        $all: ['samsung', 'monitor']
+    }
+})
+
+db.products.find({
+    tags: {
+        $elemMatch: {
+            $in: ['samsung', 'logitech']
+        }
+    }
+})
+
+db.products.find({
+    tags: {
+        $size: 4
+    }
+})
