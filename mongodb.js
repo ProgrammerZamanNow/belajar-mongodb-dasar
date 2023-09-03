@@ -15,12 +15,12 @@ db.customers.insertOne({
 
 db.products.insertMany([
     {
-        _id : 1,
+        _id: 1,
         name: "Indomie Ayam Bawang",
         price: new NumberLong("2000")
     },
     {
-        _id : 2,
+        _id: 2,
         name: "Mie Sedap Soto",
         price: new NumberLong("2000")
     }
@@ -57,4 +57,69 @@ db.products.find({
 
 db.orders.find({
     "items.product_id": 1
+})
+
+db.products.insertMany([
+    {
+        _id: 3,
+        name: "Pop Mie Rasa Bakso",
+        price: new NumberLong("2500"),
+        category: "food"
+    },
+    {
+        _id: 4,
+        name: "Samsung Galaxy S9",
+        price: new NumberLong("10000000"),
+        category: "handphone"
+    },
+    {
+        _id: 5,
+        name: "Acer Predator XXI",
+        price: new NumberLong("25000000"),
+        category: "laptop"
+    }
+])
+
+db.customers.find({
+    _id: {
+        $eq: "khannedy"
+    }
+})
+
+db.products.find({
+    price: {
+        $gt: 2000
+    }
+})
+
+db.products.find({
+    category: {
+        $in: ["laptop", "handphone"]
+    },
+    price: {
+        $gt: 10000000
+    }
+})
+
+db.products.find({
+    $and: [
+        {
+            category: {
+                $in: ["laptop", "handphone"]
+            }
+        },
+        {
+            price: {
+                $gt: 10000000
+            }
+        }
+    ]
+})
+
+db.products.find({
+    category: {
+        $not: {
+            $in: ['laptop', 'handphone']
+        }
+    }
 })
