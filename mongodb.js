@@ -254,3 +254,54 @@ db.products.find({
         $size: 4
     }
 })
+
+db.products.find({}, {
+    name: 1,
+    category: 1
+})
+
+db.products.find({}, {
+    tags: 0,
+    price: 0
+})
+
+db.products.find({}, {
+    name: 1,
+    tags: {
+        $elemMatch: {
+            $in: ['samsung', 'logitech', 'accessories']
+        }
+    }
+})
+
+
+db.products.find({
+    tags: {
+        $exists: true
+    }
+}, {
+    name: 1,
+    "tags.$": 1
+})
+
+db.products.find({
+    tags: {
+        $exists: true
+    }
+}, {
+    name: 1,
+    tags: {
+        $slice: 2
+    }
+})
+
+db.products.find({}).count()
+
+db.products.find({}).limit(4)
+
+db.products.find({}).skip(2).limit(4)
+
+db.products.find({}).sort({
+    category: 1,
+    name: -1
+}).limit(4)
