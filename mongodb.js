@@ -42,3 +42,19 @@ db.orders.insertOne({
         }
     ]
 })
+
+db.customers.find({
+    _id: "khannedy"
+})
+
+db.customers.find({
+    name: "Eko Kurniawan Khannedy"
+})
+
+db.products.find({
+    price: 2000
+})
+
+db.orders.find({
+    "items.product_id": 1
+})
