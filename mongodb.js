@@ -305,3 +305,55 @@ db.products.find({}).sort({
     category: 1,
     name: -1
 }).limit(4)
+
+db.products.updateOne({
+    _id: 1
+}, {
+    $set: {
+        category: 'food'
+    }
+})
+
+db.products.updateOne({
+    _id: 2
+}, {
+    $set: {
+        category: 'food'
+    }
+})
+
+db.products.updateMany({
+    $and: [
+        {
+            category: {
+                $eq: 'food'
+            }
+        },
+        {
+            tags: {
+                $exists: false
+            }
+        }
+    ]
+}, {
+    $set: {
+        tags: ['food']
+    }
+})
+
+db.products.insertOne({
+    _id: 9,
+    name: 'ups salah',
+    wrong: 'salah'
+})
+
+db.products.replaceOne({
+    _id: 9
+}, {
+    name: 'Adidas Sepatu Lari Pria',
+    price: new NumberLong("1100000"),
+    category: "shoes",
+    tags: [
+        'adidas', 'shoes', 'running'
+    ]
+})
