@@ -901,3 +901,57 @@ db.updateUser("contoh2", {
         }
     ]
 })
+
+db.createRole({
+    role: 'session_management',
+    roles: [
+        {
+            role: 'read',
+            db: 'belajar'
+        }
+    ],
+    privileges: [
+        {
+            resource: {
+                db: "belajar",
+                collection: "sessions"
+            },
+            actions: ["insert"]
+        }
+    ]
+})
+
+db.getRoles({
+    showPrivileges: true
+})
+
+db.createUser({
+    user: 'eko',
+    pwd: 'eko',
+    roles: ['session_management']
+})
+
+"mongodb://eko:eko@localhost:27017/test?authSource=admin"
+
+db.customers.insertOne({
+    _id: "contoh",
+    name: "Eko Kurniawan Khannedy"
+})
+
+db.sessions.insertOne({
+    _id: 'test',
+    name: 'test'
+})
+
+
+db.sessions.deleteOne({
+    _id: 'test'
+})
+
+db.sessions.updateOne({
+    _id: 'test'
+}, {
+    $set: {
+        name: 'test lagi'
+    }
+})
