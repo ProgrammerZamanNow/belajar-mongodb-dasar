@@ -598,3 +598,66 @@ db.customers.bulkWrite([
         }
     }
 ])
+
+db.products.createIndex({
+    category: 1
+})
+
+db.products.dropIndex("category_1")
+
+db.products.find({
+    category: 'food'
+})
+
+db.products.find({
+    category: 'food'
+}).explain()
+
+db.products.find({
+    category: 'food'
+}).sort({
+    category:1
+}).explain()
+
+db.products.find({
+    category: 'food'
+}).sort({
+    category:-1
+}).explain()
+
+db.products.find({
+    tags: 'samsung'
+}).explain()
+
+db.products.find({
+    category: 'food',
+    tags: "samsung"
+}).explain()
+
+db.products.createIndex({
+    stock: 1,
+    tags: 1
+})
+
+db.products.find({
+    stock: 10,
+    tags: "popular"
+})
+
+db.products.find({
+    stock: 10,
+    tags: "popular"
+}).explain()
+
+db.products.find({
+    stock: 10
+}).explain()
+
+db.products.find({
+    tags: 'popular'
+}).explain()
+
+db.products.find({
+    name: "samsung",
+    tags: "popular"
+}).explain()
