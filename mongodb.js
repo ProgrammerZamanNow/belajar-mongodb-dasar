@@ -661,3 +661,55 @@ db.products.find({
     name: "samsung",
     tags: "popular"
 }).explain()
+
+db.products.createIndex({
+    name: 'text',
+    category: 'text',
+    tags: 'text'
+}, {
+    weights:{
+        name: 10,
+        category: 5,
+        tags: 1
+    }
+})
+
+db.products.find({
+    $text: {
+        $search: 'mie'
+    }
+})
+
+db.products.find({
+    $text: {
+        $search: 'mie laptop'
+    }
+})
+
+db.products.find({
+    $text: {
+        $search: '"mie sedap"'
+    }
+})
+
+db.products.find({
+    $text: {
+        $search: 'mie -sedap'
+    }
+})
+
+db.products.find({
+    $text: {
+        $search: 'mie -sedap'
+    }
+}).explain()
+
+db.products.find({
+    $text: {
+        $search: 'mie laptop'
+    }
+}, {
+    searchScore: {
+        $meta: 'textScore'
+    }
+})
