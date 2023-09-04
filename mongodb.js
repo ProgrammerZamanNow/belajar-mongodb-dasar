@@ -535,3 +535,33 @@ db.products.updateMany({}, {
         }
     }
 })
+
+db.customers.insertOne({
+    _id: "spammer",
+    full_name: "Spammer"
+})
+
+db.customers.deleteOne({
+    _id: "spammer"
+})
+
+db.customers.insertMany([
+    {
+        _id: "spammer1",
+        full_name: "Spammer"
+    },
+    {
+        _id: "spammer2",
+        full_name: "Spammer"
+    },
+    {
+        _id: "spammer3",
+        full_name: "Spammer"
+    }
+])
+
+db.customers.deleteMany({
+    _id: {
+        $regex: "spammer"
+    }
+})
