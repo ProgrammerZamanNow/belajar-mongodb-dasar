@@ -851,3 +851,53 @@ db.createUser({
 "mongodb://mongo:mongo@localhost:27017/belajar?authSource=admin"
 
 "mongodb://salah:salah@localhost:27017/belajar?authSource=admin"
+
+use admin
+
+db.createUser({
+    user: 'contoh',
+    pwd: 'contoh',
+    roles: [
+        {
+            role: 'read',
+            db: 'test'
+        }
+    ]
+})
+
+db.createUser({
+    user: 'contoh2',
+    pwd: 'contoh2',
+    roles: [
+        {
+            role: 'readWrite',
+            db: 'test'
+        }
+    ]
+})
+
+"mongodb://contoh:rahasia@localhost:27017/test?authSource=admin"
+
+"mongodb://contoh2:contoh2@localhost:27017/test?authSource=admin"
+
+db.sample.insertOne({
+    _id: 1,
+    name: "eko"
+})
+
+db.changeUserPassword('contoh', 'rahasia')
+
+db.dropUser("contoh")
+
+db.updateUser("contoh2", {
+    roles: [
+        {
+            role: 'readWrite',
+            db: 'test'
+        },
+        {
+            role: 'readWrite',
+            db: 'belajar'
+        }
+    ]
+})
