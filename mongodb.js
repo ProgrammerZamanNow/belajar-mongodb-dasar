@@ -756,3 +756,83 @@ db.customers.find({
 db.customers.find({
     "customFields.hobby" : "Gaming"
 }).explain();
+
+db.createCollection("sessions");
+
+db.sessions.createIndex({
+    createdAt: 1
+}, {
+    expireAfterSeconds: 10
+})
+
+db.sessions.insertOne({
+    _id: 1,
+    session: "Session 1",
+    createdAt: new Date()
+})
+
+db.customers.createIndex({
+    email: 1
+}, {
+    unique: true,
+    sparse: true
+})
+
+db.customers.updateOne({
+    _id: "eko"
+}, {
+    $set: {
+        email: "eko@example.com"
+    }
+})
+
+db.customers.updateOne({
+    _id: "joko"
+}, {
+    $set: {
+        email: "eko@example.com"
+    }
+})
+
+db.customers.find({
+    full_name : "eko Kurniawan Khannedy"
+});
+
+db.customers.createIndex({
+    full_name: 1
+}, {
+    collation: {
+        locale: 'en',
+        strength: 2
+    }
+})
+
+db.customers.find({
+    full_name : "eko Kurniawan Khannedy"
+}).collation({
+    locale: 'en',
+    strength: 2
+});
+
+db.products.createIndex({
+    price: 1
+}, {
+    partialFilterExpression: {
+        stock: {
+            $gt: 0
+        }
+    }
+})
+
+db.products.find({
+    price: 2500
+})
+
+db.products.find({
+    price: {
+        $eq: 2500
+    },
+    stock: {
+        $gt: 0
+    }
+})
