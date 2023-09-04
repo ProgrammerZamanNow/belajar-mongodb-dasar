@@ -357,3 +357,41 @@ db.products.replaceOne({
         'adidas', 'shoes', 'running'
     ]
 })
+
+db.products.updateMany({}, {
+    $set: {
+        stock: 0
+    }
+})
+
+db.products.updateMany({}, {
+    $inc: {
+        stock: 10
+    }
+})
+
+db.customers.updateMany({}, {
+    $rename: {
+        name: 'full_name'
+    }
+})
+
+db.customers.updateMany({}, {
+    $set: {
+        wrong: 'ups'
+    }
+})
+
+db.customers.updateMany({}, {
+    $unset: {
+        wrong: ''
+    }
+})
+
+db.products.updateMany({}, {
+    $currentDate: {
+        lastModifiedDate: {
+            $type: 'date'
+        }
+    }
+})
