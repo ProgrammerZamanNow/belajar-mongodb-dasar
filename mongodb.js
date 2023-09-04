@@ -713,3 +713,46 @@ db.products.find({
         $meta: 'textScore'
     }
 })
+
+db.customers.createIndex({
+    "customFields.$**" : 1
+})
+
+db.customers.insertMany([
+    {
+        _id: "budi",
+        full_name: "Budi",
+        customFields: {
+            hobby: "Gaming",
+            university: "Universitas Belum Ada"
+        }
+    },
+    {
+        _id: "rully",
+        full_name: "Rully",
+        customFields: {
+            ipk: 3.2,
+            university: "Universitas Belum Ada"
+        }
+    },
+    {
+        _id: "rudi",
+        full_name: "Rudi",
+        customFields: {
+            motherName: "Tini",
+            passion: "Entepreneur"
+        }
+    }
+])
+
+db.customers.find({
+    "customFields.passion" : "Entepreneur"
+}).explain();
+
+db.customers.find({
+    "customFields.ipk" : 3.2
+}).explain();
+
+db.customers.find({
+    "customFields.hobby" : "Gaming"
+}).explain();
