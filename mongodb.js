@@ -836,3 +836,18 @@ db.products.find({
         $gt: 0
     }
 })
+
+use admin
+
+db.createUser({
+    user: 'mongo',
+    pwd: 'mongo',
+    roles: [
+        'userAdminAnyDatabase',
+        'readWriteAnyDatabase'
+    ]
+})
+
+"mongodb://mongo:mongo@localhost:27017/belajar?authSource=admin"
+
+"mongodb://salah:salah@localhost:27017/belajar?authSource=admin"
